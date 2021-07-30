@@ -21,15 +21,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.fivecontacts.R;
 import com.example.fivecontacts.main.model.Contato;
 import com.example.fivecontacts.main.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class AlterarContatos_Activity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -74,25 +78,30 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
     }
 
     public void salvarContato (Contato w){
-        SharedPreferences salvaContatos =
-                getSharedPreferences("contatos",Activity.MODE_PRIVATE);
+        if(!estaNaLista(w)){
+            SharedPreferences salvaContatos =
+                    getSharedPreferences("contatos",Activity.MODE_PRIVATE);
 
-        int num = salvaContatos.getInt("numContatos", 0); //checando quantos contatos já tem
-        SharedPreferences.Editor editor = salvaContatos.edit();
-        try {
-            ByteArrayOutputStream dt = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(dt);
-            dt = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(dt);
-            oos.writeObject(w);
-            String contatoSerializado= dt.toString(StandardCharsets.ISO_8859_1.name());
-            editor.putString("contato"+(num+1), contatoSerializado);
-            editor.putInt("numContatos",num+1);
-        }catch(Exception e){
-            e.printStackTrace();
+            int num = salvaContatos.getInt("numContatos", 0); //checando quantos contatos já tem
+            SharedPreferences.Editor editor = salvaContatos.edit();
+            try {
+                ByteArrayOutputStream dt = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(dt);
+                dt = new ByteArrayOutputStream();
+                oos = new ObjectOutputStream(dt);
+                oos.writeObject(w);
+                String contatoSerializado= dt.toString(StandardCharsets.ISO_8859_1.name());
+                editor.putString("contato"+(num+1), contatoSerializado);
+                editor.putInt("numContatos",num+1);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            editor.commit();
+            user.getContatos().add(w);
         }
-        editor.commit();
-        user.getContatos().add(w);
+        else{
+            Toast.makeText(this, "Contato já está na lista!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -189,4 +198,36 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
         }
         return true;
     }
+
+   private boolean estaNaLista(Contato w){
+        boolean estaNaLista = false;
+       SharedPreferences recuperarContatos = getSharedPreferences("contatos", Activity.MODE_PRIVATE);
+
+       int num = recuperarContatos.getInt("numContatos", 0);
+       ArrayList<Contato> contatos = new ArrayList<Contato>();
+
+       Contato contato;
+
+
+       for (int i = 1; i <= num; i++) {
+           String objSel = recuperarContatos.getString("contato" + i, "");
+           if (objSel.compareTo("") != 0) {
+               try {
+                   ByteArrayInputStream bis =
+                           new ByteArrayInputStream(objSel.getBytes(StandardCharsets.ISO_8859_1.name()));
+                   ObjectInputStream oos = new ObjectInputStream(bis);
+                   contato = (Contato) oos.readObject();
+
+                   if (contato.getNumero().equals(w.getNumero())  && contato.getNome().equals(w.getNome())) {
+                       estaNaLista = true;
+                   }
+
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+
+           }
+       }
+       return estaNaLista;
+   }
 }
