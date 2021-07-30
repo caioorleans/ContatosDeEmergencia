@@ -36,8 +36,10 @@ import com.example.fivecontacts.main.utils.UIEducacionalPermissao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -116,6 +118,53 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
         Log.v("PDM3","contatos:"+contatos.size());
         user.setContatos(contatos);
     }
+
+    protected void excluirContato(Contato c){
+        SharedPreferences recuperarContatos = getSharedPreferences("contatos", Activity.MODE_PRIVATE);
+
+        int num = recuperarContatos.getInt("numContatos", 0);
+        ArrayList<Contato> contatos = new ArrayList<Contato>();
+
+        Contato contato;
+
+        for (int i = 1; i <= num; i++) {
+            String objSel = recuperarContatos.getString("contato" + i, "");
+            if (objSel.compareTo("") != 0) {
+                try {
+                    ByteArrayInputStream bis =
+                            new ByteArrayInputStream(objSel.getBytes(StandardCharsets.ISO_8859_1.name()));
+                    ObjectInputStream ois = new ObjectInputStream(bis);
+                    contato = (Contato) ois.readObject();
+
+                    if (c.getNome().equals(contato.getNome()) && c.getNumero().equals(contato.getNumero())) {
+                        SharedPreferences.Editor editor = recuperarContatos.edit();
+                        try {
+                            ByteArrayOutputStream dt = new ByteArrayOutputStream();
+                            ObjectOutputStream oos = new ObjectOutputStream(dt);
+                            dt = new ByteArrayOutputStream();
+                            oos = new ObjectOutputStream(dt);
+                            c = null;
+                            oos.writeObject(c);
+                            String contatoSerializado= dt.toString(StandardCharsets.ISO_8859_1.name());
+                            editor.putString("contato"+i, contatoSerializado);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        editor.commit();
+                        atualizarListaDeContatos(user);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(getApplicationContext(), ListaDeContatos_Activity.class);
+                intent.putExtra("usuario", user);
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
+
     protected  void preencherListViewImagens(User user){
 
         final ArrayList<Contato> contatos = user.getContatos();
@@ -136,27 +185,26 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                 listItemMap.put("imageId", R.drawable.ic_action_ligar_list);
                 listItemMap.put("contato", contatosNomes[i]);
                 listItemMap.put("abrevs",contatosAbrevs[i]);
+                listItemMap.put("exclui",R.drawable.ic_action_mudarcontatos);
                 itemDataList.add(listItemMap);
             }
             SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemDataList,R.layout.list_view_layout_imagem,
-                    new String[]{"imageId","contato","abrevs"},new int[]{R.id.userImage, R.id.userTitle,R.id.userAbrev});
+                    new String[]{"imageId","contato","abrevs", "exclui"},new int[]{R.id.userImage, R.id.userTitle,R.id.userAbrev, R.id.imageView3});
 
             lv.setAdapter(simpleAdapter);
-
 
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-                    if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
+                    excluirContato(contatos.get(i));
+                    /*if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
 
                         Uri uri = Uri.parse(contatos.get(i).getNumero());
                          //  Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
                             Intent itLigar = new Intent(Intent.ACTION_CALL, uri);
                         startActivity(itLigar);
-                    }
+                    }*/
 
 
                 }
