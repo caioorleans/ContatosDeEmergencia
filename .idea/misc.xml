@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_lista_de_contatos.xml" value="0.22" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_alterar_contatos.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_lista_de_contatos.xml" value="0.25" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_novo_usuario.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/list_view_layout.xml" value="0.2" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/list_view_layout_excluir.xml" value="0.2" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/list_view_layout_imagem.xml" value="0.2" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_alterar_contatos.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_checagem_login.xml" value="0.18" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_lista_de_contatos.xml" value="0.25" />

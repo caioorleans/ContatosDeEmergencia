@@ -9,7 +9,9 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -202,7 +204,8 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
             lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    excluirContato(contatos.get(position));
+                    confirmarExclusão(contatos.get(position));
+                    //excluirContato(ocontatos.get(psition));
                 }
             });
 
@@ -397,6 +400,26 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
         }
 
 
+    }
+
+    public void confirmarExclusão(final Contato c){
+        AlertDialog.Builder msgBox = new AlertDialog.Builder(this);
+        msgBox.setTitle("Remover contato");
+        msgBox.setMessage("Deseja mesmo remover este contato?");
+        msgBox.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                excluirContato(c);
+            }
+        });
+
+        msgBox.setNegativeButton("Não", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        msgBox.show();
     }
 
 
