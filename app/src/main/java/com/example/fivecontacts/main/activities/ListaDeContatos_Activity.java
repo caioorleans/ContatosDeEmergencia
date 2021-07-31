@@ -201,7 +201,7 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
 
             lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                     excluirContato(contatos.get(position));
                 }
             });
