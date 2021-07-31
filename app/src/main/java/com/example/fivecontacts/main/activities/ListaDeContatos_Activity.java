@@ -50,6 +50,7 @@ import java.util.Map;
 public class ListaDeContatos_Activity extends AppCompatActivity implements UIEducacionalPermissao.NoticeDialogListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     ListView lv;
+    ListView lv2;
     BottomNavigationView bnv;
     User user;
 
@@ -64,6 +65,7 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
         bnv.setSelectedItemId(R.id.anvLigar);
 
         lv = findViewById(R.id.listView1);
+        lv2 = findViewById(R.id.listView2);
 
         //Dados da Intent Anterior
         Intent quemChamou = this.getIntent();
@@ -189,22 +191,32 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                 itemDataList.add(listItemMap);
             }
             SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemDataList,R.layout.list_view_layout_imagem,
-                    new String[]{"imageId","contato","abrevs", "exclui"},new int[]{R.id.userImage, R.id.userTitle,R.id.userAbrev, R.id.imageView3});
+                    new String[]{"imageId","contato","abrevs"},new int[]{R.id.userImage, R.id.userTitle,R.id.userAbrev});
+
+            SimpleAdapter simpleAdapter2 = new SimpleAdapter(this,itemDataList,R.layout.list_view_layout_excluir,
+                    new String[]{"exclui"},new int[]{R.id.imageView3});
 
             lv.setAdapter(simpleAdapter);
+            lv2.setAdapter(simpleAdapter2);
+
+            lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    excluirContato(contatos.get(position));
+                }
+            });
 
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    excluirContato(contatos.get(i));
-                    /*if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
+                    if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
 
                         Uri uri = Uri.parse(contatos.get(i).getNumero());
                          //  Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
                             Intent itLigar = new Intent(Intent.ACTION_CALL, uri);
                         startActivity(itLigar);
-                    }*/
+                    }
 
 
                 }

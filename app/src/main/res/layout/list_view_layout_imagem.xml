@@ -35,19 +35,4 @@
         android:textSize="30dp"
         android:textStyle="normal" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp"
-            app:srcCompat="@drawable/ic_action_mudarcontatos" />
-    </LinearLayout>
-
-
 </LinearLayout>
