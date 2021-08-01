@@ -9,11 +9,12 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
 
+        android:background="@color/colorMeio2"
         app:srcCompat="@drawable/ic_action_mudarcontatos" />
 
 </LinearLayout>

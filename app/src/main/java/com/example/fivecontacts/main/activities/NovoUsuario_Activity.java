@@ -45,8 +45,6 @@ public class NovoUsuario_Activity extends AppCompatActivity {
         edEmail=findViewById(R.id.edEmail);
         swLogado=findViewById(R.id.swLogado);
 
-        swTema= findViewById(R.id.swTema);
-
         setTitle("Novo Usuário");
 
 

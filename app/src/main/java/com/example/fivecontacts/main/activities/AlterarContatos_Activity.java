@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.fivecontacts.R;
@@ -158,6 +159,7 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
             for(int j=0; j<=nomesContatos.length; j++) {
                 ArrayAdapter<String> adaptador;
                 adaptador = new ArrayAdapter<String>(this, R.layout.list_view_layout, nomesContatos);
+
                 lv.setAdapter(adaptador);
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

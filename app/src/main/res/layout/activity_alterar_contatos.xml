@@ -14,7 +14,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#88FCD3C6"
+        android:background="@color/colorMeio"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,14 +32,14 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Seus contatos?"
-            android:textColor="#FF5722"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#FF5722"
+            android:background="@color/colorPrimary"
             android:onClick="onClickBuscar"
             android:text="Buscar"
             android:textColor="#FFFFFF"
