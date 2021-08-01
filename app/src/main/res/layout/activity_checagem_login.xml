@@ -95,7 +95,7 @@
             android:layout_height="49dp"
             android:background="#5E4285E3"
             android:text="Novo"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorTexto"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tvEsqueceuSenha"
             app:layout_constraintStart_toStartOf="@+id/btLogar" />
@@ -111,7 +111,7 @@
             android:linksClickable="false"
             android:selectAllOnFocus="false"
             android:text="Esqueceu a senha?"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorTexto"
             android:textColorLink="#FF5700"
             app:layout_constraintStart_toEndOf="@+id/btNovo"
             app:layout_constraintTop_toBottomOf="@+id/btLogar" />

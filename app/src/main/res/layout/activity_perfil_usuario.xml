@@ -123,7 +123,7 @@
             android:layout_marginTop="10dp"
             android:showText="false"
             android:text="Manter Logado?"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorTexto"
             android:textOff="Não"
             android:textOn="Sim"
             android:textSize="24sp"
