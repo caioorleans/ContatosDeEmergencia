@@ -189,7 +189,7 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                 listItemMap.put("imageId", R.drawable.ic_action_ligar_list);
                 listItemMap.put("contato", contatosNomes[i]);
                 listItemMap.put("abrevs",contatosAbrevs[i]);
-                listItemMap.put("exclui",R.drawable.ic_action_mudarcontatos);
+                listItemMap.put("exclui",R.drawable.ic_action_remover);
                 itemDataList.add(listItemMap);
             }
             SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemDataList,R.layout.list_view_layout_imagem,

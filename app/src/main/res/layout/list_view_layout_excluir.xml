@@ -13,6 +13,6 @@
         android:layout_height="70dp"
         android:background="@color/colorMeio2"
         android:padding="10dp"
-        app:srcCompat="@drawable/ic_action_mudarcontatos" />
+        app:srcCompat="@drawable/ic_action_remover" />
 
 </LinearLayout>
