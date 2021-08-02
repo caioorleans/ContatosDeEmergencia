@@ -157,6 +157,13 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                             e.printStackTrace();
                         }
                         editor.commit();
+
+                        SharedPreferences salvaQuantidade= getSharedPreferences("quantidadeContatos", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor escritor3= salvaQuantidade.edit();
+
+                        escritor3.putInt("quantidade",salvaQuantidade.getInt("quantidade",0)-1);
+
+                        escritor3.commit();
                         atualizarListaDeContatos(user);
                     }
 

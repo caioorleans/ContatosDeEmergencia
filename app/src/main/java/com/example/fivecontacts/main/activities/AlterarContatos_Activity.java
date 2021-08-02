@@ -82,25 +82,37 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
 
     public void salvarContato (Contato w){
         if(!estaNaLista(w)){
-            SharedPreferences salvaContatos =
-                    getSharedPreferences("contatos",Activity.MODE_PRIVATE);
+            SharedPreferences salvaQuantidade= getSharedPreferences("quantidadeContatos", Activity.MODE_PRIVATE);
+            if(salvaQuantidade.getInt("quantidade", 0) < 5){
+                SharedPreferences salvaContatos =
+                        getSharedPreferences("contatos",Activity.MODE_PRIVATE);
 
-            int num = salvaContatos.getInt("numContatos", 0); //checando quantos contatos já tem
-            SharedPreferences.Editor editor = salvaContatos.edit();
-            try {
-                ByteArrayOutputStream dt = new ByteArrayOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(dt);
-                dt = new ByteArrayOutputStream();
-                oos = new ObjectOutputStream(dt);
-                oos.writeObject(w);
-                String contatoSerializado= dt.toString(StandardCharsets.ISO_8859_1.name());
-                editor.putString("contato"+(num+1), contatoSerializado);
-                editor.putInt("numContatos",num+1);
-            }catch(Exception e){
-                e.printStackTrace();
+                int num = salvaContatos.getInt("numContatos", 0); //checando quantos contatos já tem
+                SharedPreferences.Editor editor = salvaContatos.edit();
+                try {
+                    ByteArrayOutputStream dt = new ByteArrayOutputStream();
+                    ObjectOutputStream oos = new ObjectOutputStream(dt);
+                    dt = new ByteArrayOutputStream();
+                    oos = new ObjectOutputStream(dt);
+                    oos.writeObject(w);
+                    String contatoSerializado= dt.toString(StandardCharsets.ISO_8859_1.name());
+                    editor.putString("contato"+(num+1), contatoSerializado);
+                    editor.putInt("numContatos",num+1);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                editor.commit();
+                user.getContatos().add(w);
+                SharedPreferences.Editor escritor3= salvaQuantidade.edit();
+
+                escritor3.putInt("quantidade",salvaQuantidade.getInt("quantidade",0)+1);
+
+                escritor3.commit();
             }
-            editor.commit();
-            user.getContatos().add(w);
+            else{
+                Toast.makeText(this, "Permitido salvar no máximo 5 contatos", Toast.LENGTH_LONG).show();
+            }
+
         }
         else{
             Toast.makeText(this, "Contato já está na lista!", Toast.LENGTH_LONG).show();

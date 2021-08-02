@@ -146,6 +146,13 @@ public class NovoUsuario_Activity extends AppCompatActivity {
 
                 escritor2.commit();
 
+                SharedPreferences salvaQuantidade= getSharedPreferences("quantidadeContatos", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor escritor3= salvaQuantidade.edit();
+
+                escritor3.putInt("quantidade",0);
+
+                escritor3.commit();
+
                 //Salvando o user
 
                 User user =new User(nome,login,senha,email,manterLogado);
