@@ -57,6 +57,8 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
     User user;
 
     String numeroCall;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,15 +215,30 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
 
-                        Uri uri = Uri.parse(contatos.get(i).getNumero());
-                         //  Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
+                    SharedPreferences salva= getSharedPreferences("permissaoPedida", Activity.MODE_PRIVATE);
+                    if(!salva.getBoolean("permissao", false)){
+                        if (checarPermissaoPhone_SMD(contatos.get(i).getNumero())) {
+
+                            Uri uri = Uri.parse(contatos.get(i).getNumero());
+                            //  Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
                             Intent itLigar = new Intent(Intent.ACTION_CALL, uri);
-                        startActivity(itLigar);
+                            startActivity(itLigar);
+                        }
                     }
-
-
+                    else{
+                        if(checarPermissaoPhone_SMD()){
+                            Uri uri = Uri.parse(contatos.get(i).getNumero());
+                            //  Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
+                            Intent itLigar = new Intent(Intent.ACTION_CALL, uri);
+                            startActivity(itLigar);
+                        }
+                        else{
+                            Uri uri = Uri.parse(contatos.get(i).getNumero());
+                            Intent itLigar = new Intent(Intent.ACTION_DIAL, uri);
+                            startActivity(itLigar);
+                        }
+                    }
                 }
             });
 
@@ -302,9 +319,30 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                 mensagemPermissao.show(getSupportFragmentManager(), "segundavez2");
                 Log.v ("SMD","Outra Vez");
 
+                SharedPreferences salva= getSharedPreferences("permissaoPedida", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor escritor2= salva.edit();
+
+                escritor2.putBoolean("permissao",true);
+
+                escritor2.commit();
+
             }
       }
-        return false;
+      return false;
+    }
+
+    protected boolean checarPermissaoPhone_SMD() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            Log.v("SMD", "Tenho permissão");
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
 
@@ -321,8 +359,6 @@ public class ListaDeContatos_Activity extends AppCompatActivity implements UIEdu
                    startActivity(itLigar);
 
                }else{
-                   Toast.makeText(this, "SEU FELA!", Toast.LENGTH_LONG).show();
-
                    String mensagem= "Seu aplicativo pode ligar diretamente, mas sem permissão não funciona. Se você marcou não perguntar mais, você deve ir na tela de configurações para mudar a instalação ou reinstalar o aplicativo  ";
                    String titulo= "Porque precisamos telefonar?";
                    UIEducacionalPermissao mensagemPermisso = new UIEducacionalPermissao(mensagem,titulo,2);

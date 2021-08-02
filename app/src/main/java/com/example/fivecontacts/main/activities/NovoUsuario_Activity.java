@@ -139,6 +139,13 @@ public class NovoUsuario_Activity extends AppCompatActivity {
 
                 escritor.commit(); //Salva em Disco
 
+                SharedPreferences salva= getSharedPreferences("permissaoPedida", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor escritor2= salva.edit();
+
+                escritor2.putBoolean("permissao",false);
+
+                escritor2.commit();
+
                 //Salvando o user
 
                 User user =new User(nome,login,senha,email,manterLogado);
