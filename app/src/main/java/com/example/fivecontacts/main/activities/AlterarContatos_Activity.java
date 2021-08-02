@@ -35,6 +35,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AlterarContatos_Activity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -156,7 +158,35 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
         }
 
         if (nomesContatos !=null) {
-            for(int j=0; j<=nomesContatos.length; j++) {
+            ArrayList<Map<String,Object>> itemDataList = new ArrayList<Map<String,Object>>();;
+
+            for(i =0; i < nomesContatos.length; i++) {
+                Map<String,Object> listItemMap = new HashMap<String,Object>();
+                listItemMap.put("imageId", R.drawable.ic_action_mudar);
+                listItemMap.put("contato", nomesContatos[i]);
+                itemDataList.add(listItemMap);
+            }
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemDataList,R.layout.list_view_layout2,
+                    new String[]{"imageId","contato"},new int[]{R.id.imagemLigar, R.id.nomeContato});
+
+            lv.setAdapter(simpleAdapter);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Contato c= new Contato();
+                    c.setNome(nomesContatos[i]);
+                    c.setNumero("tel:+"+telefonesContatos[i]);
+                    salvarContato(c);
+                    Intent intent = new Intent(getApplicationContext(), ListaDeContatos_Activity.class);
+                    intent.putExtra("usuario", user);
+                    startActivity(intent);
+                    finish();
+
+                }
+            });
+            /*for(int j=0; j<=nomesContatos.length; j++) {
                 ArrayAdapter<String> adaptador;
                 adaptador = new ArrayAdapter<String>(this, R.layout.list_view_layout, nomesContatos);
 
@@ -176,7 +206,7 @@ public class AlterarContatos_Activity extends AppCompatActivity implements Botto
 
                     }
                 });
-            }
+            }*/
         }
     }
 

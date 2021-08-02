@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/imagemLigar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        app:srcCompat="@drawable/ic_action_ligar_list" />
+
+    <TextView
+        android:id="@+id/nomeContato"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorTexto"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+</LinearLayout>
