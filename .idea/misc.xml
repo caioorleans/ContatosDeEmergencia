@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1125" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_alterar_contatos.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_checagem_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/activity_lista_de_contatos.xml" value="0.25" />
@@ -12,6 +13,8 @@
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/list_view_layout_excluir.xml" value="0.2" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/layout/list_view_layout_imagem.xml" value="0.2" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/menu/activity_main_bottom_actions.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1125" />
+        <entry key="..\:/Users/caioo/AndroidStudioProjects/ContatosDeEmergencia/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1125" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_alterar_contatos.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_checagem_login.xml" value="0.18" />
         <entry key="..\:/Users/caioo/AndroidStudioProjects/FiveContactsvLV/app/src/main/res/layout/activity_lista_de_contatos.xml" value="0.25" />
